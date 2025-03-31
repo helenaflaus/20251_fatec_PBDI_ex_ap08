@@ -4,16 +4,35 @@
 --Números reais: [1, 10]
 --FLOOR() é uma função matemática no PostgreSQL que arredonda um número para baixo
 
+--1.3 Faça um programa que gere um valor real no intervalo [20, 30] que representa uma temperatura em graus Celsius. 
+--Faça a conversão para Fahrenheit e exiba.
+-- F = (9/5 * C) + 32
+DO $$
+DECLARE
+    celsius NUMERIC (4, 2);
+    fahrenheit NUMERIC (4, 2);
+    limite_inferior NUMERIC := 20;
+    limite_superior NUMERIC := 30;
+BEGIN
+    -- (0.0 a 0.99) * 10 + 20 = 20 a 29.99
+    celsius := random() * (limite_superior - limite_inferior) + limite_inferior;
+    RAISE NOTICE 'celsius: %', celsius;
+    fahrenheit := ((9 / 5) * celsius) + 32;
+    RAISE NOTICE 'fahrenheit: %', fahrenheit;
+END;
+$$
+
 --1.2. Faça um programa que gere um valor real e o exiba.
 DO $$
 DECLARE
     -- NUMERIC (x, y): até X digitos, sendo 2 após a vírgula
-    n2 NUMERIC (5, 2);
-    limite_inferior INT := 1;
-    limite_superior INT := 10;
+    n2 NUMERIC (4, 2);
+    limite_inferior NUMERIC := 1;
+    limite_superior NUMERIC := 10;
 BEGIN
     -- 1 <= ne <= 10 (real)
-    n2 := random() * (limite_superior - limite_inferior + 1) + limite_inferior;
+     -- (0.0 a 0.99) * 9 + 1 = 1.00 a 9.99
+    n2 := random() * (limite_superior - limite_inferior) + limite_inferior;
     RAISE NOTICE 'n2: %', n2;
 END;
 $$
@@ -30,8 +49,7 @@ BEGIN
     -- n1 := FLOOR(random() * (100 - 1 + 1) + 1)
     -- random() = 0 a 1
     -- floor = arredonda para baixo
-    -- random() * 99 = 0.000x a 99.99 
-    -- random() * 99 + 1 = (0.000x a 99.99) + 1 temos 1 a 100
+    -- (0.0 a 0.99) * 100 + 1 = 1.0 a 100.0
     n1 := FLOOR(random() * (limite_superior - limite_inferior + 1) + limite_inferior);
     RAISE NOTICE 'n1: %', n1;
 END;
