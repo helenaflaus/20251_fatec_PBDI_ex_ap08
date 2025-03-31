@@ -4,12 +4,31 @@
 --Números reais: [1, 10]
 --FLOOR() é uma função matemática no PostgreSQL que arredonda um número para baixo
 
+--1.5 Faça um programa que gere um número inteiro e mostre a raiz cúbica de seu antecessor e a raiz quadrada de seu sucessor.
+DO $$
+DECLARE
+    n1 INT;
+    n2 INT;
+    n3 INT;
+    limite_inferior INT := 1;
+    limite_superior INT := 100;
+BEGIN
+    -- 1 <= n1 <= 100
+    -- n1 := FLOOR(random() * (100 - 1 + 1) + 1)
+    -- random() = 0 a 1
+    -- floor = arredonda para baixo
+    -- (0.0 a 0.99) * 100 + 1 = 1.0 a 100.0
+    n1 := FLOOR(random() * (limite_superior - limite_inferior + 1) + limite_inferior);
+    n2 := (n1 - 1) ^ 3;
+    n3 := (n1 + 1) ^ 2;
+    RAISE NOTICE 'n = %, raiz cúbica de seu antecessor = % e a raiz quadrada de seu sucessor = %', n1, n2, n3;
+END;
+$$
+
 --1.4 Faça um programa que gere três valores reais a, b, e c e mostre o valor de delta: aquele
 --que calculamos para chegar às potenciais raízes de uma equação do segundo grau.
 DO $$
 DECLARE
-    -- 1 <= ne <= 10 (real)
-    -- (0.0 a 0.99) * 9 + 1 = 1.00 a 9.99
     a NUMERIC (3, 1);
     b NUMERIC (3, 1);
     c NUMERIC (3, 1);
