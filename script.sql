@@ -4,6 +4,30 @@
 --Números reais: [1, 10]
 --FLOOR() é uma função matemática no PostgreSQL que arredonda um número para baixo
 
+--1.4 Faça um programa que gere três valores reais a, b, e c e mostre o valor de delta: aquele
+--que calculamos para chegar às potenciais raízes de uma equação do segundo grau.
+DO $$
+DECLARE
+    -- 1 <= ne <= 10 (real)
+    -- (0.0 a 0.99) * 9 + 1 = 1.00 a 9.99
+    a NUMERIC (3, 1);
+    b NUMERIC (3, 1);
+    c NUMERIC (3, 1);
+    limite_inferior NUMERIC := 1;
+    limite_superior NUMERIC := 10;
+    delta NUMERIC (5, 1);
+BEGIN
+    -- 1 <= ne <= 10 (real)
+    -- (0.0 a 0.99) * 9 + 1 = 1.00 a 9.99
+    a := random() * (limite_superior - limite_inferior) + limite_inferior;
+    b := random() * (limite_superior - limite_inferior) + limite_inferior;
+    c := random() * (limite_superior - limite_inferior) + limite_inferior;
+    -- Δ = b² - 4ac
+    delta := (b ^ 2) - 4 * a * c;
+    RAISE NOTICE 'Delta de %, % e % é %', a, b, c, delta;
+END;
+$$
+
 --1.3 Faça um programa que gere um valor real no intervalo [20, 30] que representa uma temperatura em graus Celsius. 
 --Faça a conversão para Fahrenheit e exiba.
 -- F = (9/5 * C) + 32
@@ -31,7 +55,7 @@ DECLARE
     limite_superior NUMERIC := 10;
 BEGIN
     -- 1 <= ne <= 10 (real)
-     -- (0.0 a 0.99) * 9 + 1 = 1.00 a 9.99
+    -- (0.0 a 0.99) * 9 + 1 = 1.00 a 9.99
     n2 := random() * (limite_superior - limite_inferior) + limite_inferior;
     RAISE NOTICE 'n2: %', n2;
 END;
