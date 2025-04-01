@@ -4,6 +4,30 @@
 --Números reais: [1, 10]
 --FLOOR() é uma função matemática no PostgreSQL que arredonda um número para baixo
 
+--1.6 Faça um programa que gere medidas reais de um terreno retangular. Gere também um
+--valor real no intervalo [60, 70] que representa o preço por metro quadrado. O programa deve exibir o valor total do terreno.
+DO $$
+DECLARE
+    a NUMERIC (3, 1);
+    b NUMERIC (3, 1);
+    area NUMERIC (3, 1);
+    limite_inferior_ret NUMERIC := 1;
+    limite_superior_ret NUMERIC := 10;
+    valor_metro NUMERIC (3, 1);
+    limite_inferior_val NUMERIC := 60;
+    limite_superior_val NUMERIC := 70;
+    valor_total NUMERIC (6, 1);
+BEGIN
+    a := random() * (limite_superior_ret - limite_inferior_ret) + limite_inferior_ret;
+    b := random() * (limite_superior_ret - limite_inferior_ret) + limite_inferior_ret;
+    area := a * b;
+    RAISE NOTICE 'O terreno possui %m de frente e %m de lateral totalizando % m²', a, b, area;
+    valor_metro := random() * (limite_superior_val - limite_inferior_val) + limite_inferior_val;
+    valor_total := area * valor_metro;
+    RAISE NOTICE 'O m² custa R$ % e o valor total do terreno é R$ %', valor_metro, valor_total;
+END;
+$$
+
 --1.5 Faça um programa que gere um número inteiro e mostre a raiz cúbica de seu antecessor e a raiz quadrada de seu sucessor.
 DO $$
 DECLARE
