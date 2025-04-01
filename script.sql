@@ -4,6 +4,27 @@
 --Números reais: [1, 10]
 --FLOOR() é uma função matemática no PostgreSQL que arredonda um número para baixo
 
+--1.7 Escreva um programa que gere um inteiro que representa o ano de nascimento de uma
+--pessoa no intervalo [1980, 2000] e gere um inteiro que representa o ano atual no intervalo
+--[2010, 2020]. O programa deve exibir a idade da pessoa em anos. Desconsidere detalhes
+--envolvendo dias, meses, anos bissextos etc.
+DO $$
+DECLARE
+    nascimento INT;
+    anohoje INT;
+    inf_nasc INT := 1980;
+    sup_nasc INT := 2000;
+    inf_hoje INT := 2010;
+    sup_hoje INT := 2020;   
+    idade INT;
+BEGIN
+    nascimento := FLOOR(random() * (sup_nasc - inf_nasc + 1) + inf_nasc);
+    anohoje := FLOOR(random() * (sup_hoje - inf_hoje + 1) + inf_hoje);
+    idade := anohoje - nascimento;
+    RAISE NOTICE 'Nasceu em %, ano hoje %, a pessoa possui % anos.', nascimento, anohoje, idade;
+END;
+$$
+
 --1.6 Faça um programa que gere medidas reais de um terreno retangular. Gere também um
 --valor real no intervalo [60, 70] que representa o preço por metro quadrado. O programa deve exibir o valor total do terreno.
 DO $$
